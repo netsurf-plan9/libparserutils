@@ -1,0 +1,4 @@
+The file 'aliases.inc' is generated from the Makefile with
+a perl script. It does not seem that it has changed much
+lately, so I include the generated aliases.inc file for now.
+Do not want to toy with Perl right now, if not necessary.
