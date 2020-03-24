@@ -1,7 +1,11 @@
 </$objtype/mkfile
 
-CC=pcc
-OBJ=utils/buffer.$O utils/stack.$O utils/vector.$O \
+
+LIB=libparserutils.$O.a
+OBJ=\
+	utils/buffer.$O\
+	 utils/stack.$O \
+	utils/vector.$O \
 	utils/errors.$O \
 	input/filter.$O input/inputstream.$O \
 	charset/aliases.$O  \
@@ -12,18 +16,10 @@ OBJ=utils/buffer.$O utils/stack.$O utils/vector.$O \
 	charset/codecs/codec_utf16.$O charset/codecs/codec_utf8.$O \
 #	extra/bsearch.$O extra/assert.$O
 
-HFILES=../include/parserutils/parserutils.h
+HFILES=../include/parserutils/parserutils.h charset/aliases.inc
 
-CFLAGS=-I ../include -I . -I ../../posix/include -DWITHOUT_ICONV_FILTER -D_SUSV2_SOURCE
+<../../nsport.mk
+<../../nsportlib.mk
 
-all:V:	libparserutils.$O.a
-
-libparserutils.$O.a: $OBJ $HFILES
-	ar rv libparserutils.$O.a $OBJ
-
-
-%.$O:	%.c $HFILES
-	$CC $CFLAGS -c -o $target $stem.c
-
-clean:V:
-	rm -f $OBJ libparserutils.$O.a
+charset/aliases.inc:
+	cp ../../genfiles/libparserutils/aliases.inc charset/aliases.inc
